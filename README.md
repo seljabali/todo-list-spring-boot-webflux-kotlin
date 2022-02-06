@@ -10,7 +10,6 @@
 
 ## Prerequisites
 * [Java JDK Oracle (SE) 17](https://www.oracle.com/java/technologies/downloads/#java17)
-* [MongoDB Compass](https://www.mongodb.com/try/download/compass)
 * [IntelliJ IDEA CE](https://www.jetbrains.com/idea/download/)
 
 ## Dependencies
