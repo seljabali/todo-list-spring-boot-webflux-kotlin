@@ -6,7 +6,7 @@
 ## Built With
 * [Kotlin](https://kotlinlang.org/)
 * [Postgre SQL](https://www.postgresql.org)
-* [Spring Boot 3.0](https://spring.io)
+* [Spring Boot 2.6.3](https://spring.io)
 
 ## Prerequisites
 * [Java JDK Oracle (SE) 17](https://www.oracle.com/java/technologies/downloads/#java17)
