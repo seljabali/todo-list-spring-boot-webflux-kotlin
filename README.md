@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-<h2 align="center">Todo List using Spring Boot Webflux</h2>
+<h2 align="center">Todo List</h2>
 <br>
 
 ## Built With
@@ -113,6 +113,6 @@ source ~/.zshrc
 <summary>Run Project</summary>
 
 ```bash
-
+./gradlew bootRun --args='--spring.profiles.active=dev'
 ```
 </details>
