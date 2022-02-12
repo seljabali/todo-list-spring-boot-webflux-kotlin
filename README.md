@@ -5,7 +5,7 @@
 
 ## Built With
 * [Kotlin](https://kotlinlang.org/)
-* [Postgre SQL](https://www.postgresql.org)
+* [PostgreSQL](https://www.postgresql.org)
 * [Spring Boot 2.6.3](https://spring.io)
 
 ## Prerequisites
