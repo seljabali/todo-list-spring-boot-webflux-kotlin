@@ -1,7 +1,8 @@
-package org.eljabali.sami.todo
+package org.eljabali.sami.todo.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.eljabali.sami.todo.models.Todo
 import org.springframework.stereotype.Component
 
 @Component

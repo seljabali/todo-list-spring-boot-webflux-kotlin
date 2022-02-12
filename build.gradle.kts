@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-//	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:2.6.3")
+	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:2.6.3")
 	implementation("org.springframework.boot:spring-boot-starter-webflux:2.6.3")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.1.5")
@@ -33,8 +33,11 @@ dependencies {
 	compileOnly("org.projectlombok:lombok:1.18.22")
 
 	runtimeOnly("org.springframework.boot:spring-boot-devtools:2.6.3")
-//	runtimeOnly("io.r2dbc:r2dbc-postgresql")
-//	runtimeOnly("org.postgresql:postgresql")
+	runtimeOnly("io.r2dbc:r2dbc-postgresql:0.8.10.RELEASE")
+	runtimeOnly("org.postgresql:postgresql:42.3.1")
+
+//	spring-boot-test-autoconfigure-r2dbc
+//	spring-boot-bom-r2dbc
 
 	annotationProcessor("org.projectlombok:lombok:1.18.22")
 
