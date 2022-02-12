@@ -24,8 +24,7 @@ class TodosController(
     private val todoPostgresRepo: TodoPostgresRepo
 ) {
     @GetMapping("")
-//    fun findAll(): Flow<Todo> = todoRepository.findAll()
-    fun findAll(): Flow<Any> = todoPostgresRepo.findAll()
+    fun findAll(): Flow<Todo> = todoPostgresRepo.findAll()
 
     @GetMapping("count")
     suspend fun count(): Long = todoRepository.count()

@@ -21,8 +21,7 @@ class TodoPostgresRepo(private val client: DatabaseClient) {
 //        client.sql("SELECT * FROM ${TodoTable.TableName};")
 //        .fetch()
 //        .flow()
-    fun findAll(): Flow<Any> =
-//        client.sql("CREATE TABLE ${TodoTable.TableName};")
+    fun findAll(): Flow<Todo> =
         client.sql(
             """
             DROP TABLE IF EXISTS ${TodoTable.TableName};
@@ -45,19 +44,12 @@ class TodoPostgresRepo(private val client: DatabaseClient) {
             SELECT * FROM ${TodoTable.TableName};
         """.trimIndent()
         )
-            .fetch()
-            .flow()
-
-//        ).map { row ->
-//            row.
-//        }
-
-
-//    fun findAll(): Flow<Todo> = flow {
-//        for (todo in todos) {
-//            emit(todo)
-//        }
-//    }
+            .map { row ->
+                val id = row.get(TodoTable.Id).toString()
+                val title = row.get(TodoTable.Title) as String
+                val content = row.get(TodoTable.Content) as String
+                return@map Todo(id, title, content)
+            }.flow()
 
     suspend fun deleteAll() = todos.clear()
 
