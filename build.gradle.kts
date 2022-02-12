@@ -22,19 +22,24 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+//	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:2.6.3")
+	implementation("org.springframework.boot:spring-boot-starter-webflux:2.6.3")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
+	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.1.5")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-	compileOnly("org.projectlombok:lombok")
-	runtimeOnly("io.r2dbc:r2dbc-postgresql")
-	runtimeOnly("org.postgresql:postgresql")
-	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("io.projectreactor:reactor-test")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.0-native-mt")
+
+	compileOnly("org.projectlombok:lombok:1.18.22")
+
+	runtimeOnly("org.springframework.boot:spring-boot-devtools:2.6.3")
+//	runtimeOnly("io.r2dbc:r2dbc-postgresql")
+//	runtimeOnly("org.postgresql:postgresql")
+
+	annotationProcessor("org.projectlombok:lombok:1.18.22")
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.3")
+	testImplementation("io.projectreactor:reactor-test:3.4.14")
 }
 
 tasks.withType<KotlinCompile> {
