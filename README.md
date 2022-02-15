@@ -15,7 +15,6 @@
 ## Dependencies
 * [Spring Reactive Webflux](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux)
 * [Spring Data R2DBC SQL](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-r2dbc)
-* [Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok)
 * [PostgreSQL Driver SQL](https://mvnrepository.com/artifact/org.postgresql/postgresql)
 
 ## Troubleshooting
