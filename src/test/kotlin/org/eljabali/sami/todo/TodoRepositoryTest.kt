@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
+import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
@@ -47,6 +48,9 @@ class PostRepositoryTest {
     }
 
     @Autowired
+    lateinit var dbclient: DatabaseClient
+
+    @Autowired
     lateinit var template: R2dbcEntityTemplate
 
     @Autowired
@@ -60,6 +64,11 @@ class PostRepositoryTest {
 
     @Test
     fun testDatabaseClientExisted() {
+        assertNotNull(dbclient)
+    }
+
+    @Test
+    fun testR2dbcEntityTemplateExisted() {
         assertNotNull(template)
     }
 
@@ -85,7 +94,7 @@ class PostRepositoryTest {
         todos.save(found).awaitSingle()
         val updated = todos.findById(saved.id!!).awaitSingle()
         assertThat(updated.title).isEqualTo("update title")
-       // assertThat(updated.completed).isTrue()
+        // assertThat(updated.completed).isTrue()
         updated.completed shouldBe true //kotest assertions
     }
 }
