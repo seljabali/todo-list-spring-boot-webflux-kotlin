@@ -17,7 +17,20 @@
 * [Spring Data R2DBC SQL](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-r2dbc)
 * [PostgreSQL Driver SQL](https://mvnrepository.com/artifact/org.postgresql/postgresql)
 
+
+
+## Features
+
+* Tech stack: Spring WebFlux+ Kotlin Coroutines+ Spring Data R2dbc 
+* Mockk and Spring Mockk for mocking beans  instread of Mockito
+* Kotest assertions provides fluent Kotlin DSL API for assertions in tests.
+* Spring Doc to expose OopenAPI and SwaggerUI on the management endpoints. The Swagger UI is located  to http://localhost:9090/actuator/swagger-ui . 
+*  Docker Compose to serve a running Postgres.
+
+
+
 ## Troubleshooting
+
 <!-- Ensure Java Home variable is set -->
 <details>
 <summary>Ensure Java Home variable is set</summary>
@@ -118,3 +131,4 @@ source ~/.zshrc
 java -jar build/todo-xxxx.jar 
 ```
 </details>
+
