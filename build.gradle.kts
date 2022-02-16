@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
+    id("com.gorylenko.gradle-git-properties") version "1.5.1"
 }
 
 group = "org.eljabali.sami.todo"
@@ -21,13 +22,22 @@ val kotlinCoVersion = project.properties["kotlinCoVersion"]
 val kotestVersion = project.properties["kotestVersion"]
 val mockkVersion = project.properties["mockkVersion"]
 val springmockkVersion = project.properties["springmockkVersion"]
+val springdocVersion = project.properties["springdocVersion"]
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
+    // security
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
     // spring data r2dbc and postgres drivers
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     runtimeOnly("io.r2dbc:r2dbc-postgresql")
+
+    //spring doc support
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springdoc:springdoc-openapi-webflux-ui:${springdocVersion}")
+    implementation("org.springdoc:springdoc-openapi-security:${springdocVersion}")
 
     //kotlin support
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -78,4 +88,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+springBoot {
+    buildInfo()
 }

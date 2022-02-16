@@ -1,4 +1,8 @@
 package org.eljabali.sami.todo
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
-interface TodoRepository : ReactiveCrudRepository<Todo, Long>
+import org.springframework.data.r2dbc.repository.R2dbcRepository
+import reactor.core.publisher.Flux
+
+interface TodoRepository : R2dbcRepository<Todo, Long> {
+    fun findByCompletedIsTrue(): Flux<Todo> //an example of findByXXX derived queries.
+}

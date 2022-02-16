@@ -1,7 +1,12 @@
 package org.eljabali.sami.todo
 
+import io.kotest.matchers.comparables.shouldBeEqualComparingTo
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -23,9 +28,9 @@ import org.testcontainers.utility.MountableFile
 @OptIn(ExperimentalCoroutinesApi::class)
 @DataR2dbcTest
 @Testcontainers
-class PostRepositoryTest {
+class TodoRepositoryTest {
     companion object {
-        private val log = LoggerFactory.getLogger(PostRepositoryTest::class.java)
+        private val log = LoggerFactory.getLogger(TodoRepositoryTest::class.java)
 
         @Container
         private val postgreSQLContainer: PostgreSQLContainer<*> = PostgreSQLContainer<Nothing>("postgres:12")
@@ -94,7 +99,20 @@ class PostRepositoryTest {
         todos.save(found).awaitSingle()
         val updated = todos.findById(saved.id!!).awaitSingle()
         assertThat(updated.title).isEqualTo("update title")
-        // assertThat(updated.completed).isTrue()
-        updated.completed shouldBe true //kotest assertions
+        assertThat(updated.completed).isTrue()
+        updated.completed shouldBe true
+    }
+
+    @Test//using kotest assertions
+    fun testFindCompletedTodos() = runTest {
+        val data = Todo(title = "test title", completed = true)
+        val saved = todos.save(data).awaitSingle()
+
+        saved.id shouldNotBe null
+
+        val completedTodos = todos.findByCompletedIsTrue().asFlow()
+
+        completedTodos.count() shouldBeEqualComparingTo 1
+        completedTodos.toList().get(0).completed shouldBe true
     }
 }

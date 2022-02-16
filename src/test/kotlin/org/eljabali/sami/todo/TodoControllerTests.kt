@@ -6,6 +6,8 @@ import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
+import org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -14,7 +16,7 @@ import reactor.core.publisher.Mono
 
 @WebFluxTest(
     controllers = [TodoController::class],
-    //  excludeAutoConfiguration = [ReactiveUserDetailsServiceAutoConfiguration::class, ReactiveSecurityAutoConfiguration::class]
+    excludeAutoConfiguration = [ReactiveUserDetailsServiceAutoConfiguration::class, ReactiveSecurityAutoConfiguration::class]
 )
 class TodoControllerTests {
 
@@ -182,5 +184,22 @@ class TodoControllerTests {
         verify(exactly = 1) { todos.findById(any<Long>()) }
         verify(exactly = 1) { todos.delete(any<Todo>()) }
     }
+
+    // test not found exceptions.
+    @Test
+    fun `get single todo with non-existing id`() {
+        every { todos.findById(any<Long>()) }.returns(
+            Mono.empty()
+        )
+
+        client.get()
+            .uri("/todos/1")
+            .exchange()
+            .expectStatus()
+            .isNotFound
+
+        verify(exactly = 1) { todos.findById(any<Long>()) }
+    }
+
 
 }

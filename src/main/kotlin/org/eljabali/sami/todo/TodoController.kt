@@ -1,5 +1,7 @@
 package org.eljabali.sami.todo
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse
@@ -16,6 +18,7 @@ class TodoController(
     private val todos: TodoRepository
 ) {
     @GetMapping("")
+    @ApiResponses(value = [ApiResponse(responseCode = "200", description = "Get all Todos")])
     fun findAll(): Flow<Todo> = todos.findAll().asFlow()
 
     @GetMapping("{id}")
@@ -63,7 +66,7 @@ class TodoController(
     suspend fun deleteById(@PathVariable id: Long): ResponseEntity<Any>? {
         val existed = todos.findById(id).awaitFirstOrElse { throw TodoNotFoundException(id) }
         todos.delete(existed).awaitSingleOrNull()
-        return  ResponseEntity.noContent().build<Any>()
+        return ResponseEntity.noContent().build<Any>()
     }
 
 }
