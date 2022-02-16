@@ -93,7 +93,7 @@ source ~/.zshrc
 <summary>Clean Project</summary>
 
 ```bash
-
+./gradlew clean
 ```
 </details>
 
@@ -102,7 +102,7 @@ source ~/.zshrc
 <summary>Build Project</summary>
 
 ```bash
-
+./gradlew build
 ```
 </details>
 
@@ -112,5 +112,9 @@ source ~/.zshrc
 
 ```bash
 ./gradlew bootRun --args='--spring.profiles.active=dev'
+
+// or
+./gradlew build
+java -jar build/todo-xxxx.jar 
 ```
 </details>
