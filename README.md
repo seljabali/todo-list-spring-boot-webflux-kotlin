@@ -22,12 +22,11 @@
 ## Features
 
 * Tech stack: Spring WebFlux+ Kotlin Coroutines+ Spring Data R2dbc 
-* Mockk and Spring Mockk for mocking beans  instread of Mockito
-* Kotest assertions provides fluent Kotlin DSL API for assertions in tests.
-* Spring Doc to expose OopenAPI and SwaggerUI on the management endpoints. The Swagger UI is located  to http://localhost:9090/actuator/swagger-ui . 
-*  Docker Compose to serve a running Postgres.
-
-
+* Instread of Mockito, using Mockk and Spring Mockk to mock beans 
+* Kotest assertions provides fluent Kotlin DSL API for assertions in tests
+* Spring Doc to expose OopenAPI and SwaggerUI on the management endpoints. The Swagger UI is located at http://localhost:9090/actuator/swagger-ui . 
+* Docker Compose to serve a running Postgres when running the application
+* Test persistence with a Postgres database running in TestContainers  
 
 ## Troubleshooting
 
