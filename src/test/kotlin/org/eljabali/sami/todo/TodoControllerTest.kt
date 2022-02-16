@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono
     controllers = [TodoController::class],
     excludeAutoConfiguration = [ReactiveUserDetailsServiceAutoConfiguration::class, ReactiveSecurityAutoConfiguration::class]
 )
-class TodoControllerTests {
+class TodoControllerTest {
 
     @Autowired
     private lateinit var client: WebTestClient

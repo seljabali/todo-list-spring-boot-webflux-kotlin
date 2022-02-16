@@ -16,7 +16,7 @@ class DataInitializer(private val r2dbcEntityTemplate: R2dbcEntityTemplate) {
         runBlocking {
             val deleted = r2dbcEntityTemplate.delete(Todo::class.java).all().awaitSingle()
             println(" $deleted posts removed.")
-            r2dbcEntityTemplate.insert(Todo(title = "Kotlin Coroutines example", completed = false)).awaitSingle()
+            r2dbcEntityTemplate.insert(Todo(title = "Kotlin Coroutines Example", completed = false)).awaitSingle()
         }
         println(" done data initialization  ...")
     }
