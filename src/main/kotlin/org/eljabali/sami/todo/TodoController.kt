@@ -48,14 +48,14 @@ class TodoController(
             .awaitSingle()
     }
 
-    @PutMapping("{id}/completed")
+    @PutMapping("{id}/status")
     suspend fun updateCompletedStatus(
         @PathVariable id: Long,
-        @RequestBody body: MarkAsCompletedCommand
+        @RequestBody body: UpdateStatusCommand
     ): ResponseEntity<Any> {
         val existed = todos.findById(id).awaitFirstOrElse { throw TodoNotFoundException(id) }
             .apply {
-                completed = body.completed
+                status = body.status
             }
         return todos.save(existed)
             .map { ResponseEntity.noContent().build<Any>() }

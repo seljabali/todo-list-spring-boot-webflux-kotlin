@@ -90,29 +90,28 @@ class TodoRepositoryTest {
         assertNotNull(saved.id)
         val found = todos.findById(saved!!.id!!).awaitSingle()
         assertThat(found.title).isEqualTo("test title")
-        assertThat(found.completed).isFalse
+        assertThat(found.status).isEqualTo(Status.TODO)
 
         found.apply {
             title = "update title"
-            completed = true
+            status = Status.DONE
         }
         todos.save(found).awaitSingle()
         val updated = todos.findById(saved.id!!).awaitSingle()
         assertThat(updated.title).isEqualTo("update title")
-        assertThat(updated.completed).isTrue()
-        updated.completed shouldBe true
+        assertThat(found.status).isEqualTo(Status.DONE)
     }
 
     @Test//using kotest assertions
     fun testFindCompletedTodos() = runTest {
-        val data = Todo(title = "test title", completed = true)
+        val data = Todo(title = "test title", status = Status.DONE)
         val saved = todos.save(data).awaitSingle()
 
         saved.id shouldNotBe null
 
-        val completedTodos = todos.findByCompletedIsTrue().asFlow()
+        val completedTodos = todos.findByStatus(Status.DONE).asFlow()
 
         completedTodos.count() shouldBeEqualComparingTo 1
-        completedTodos.toList().get(0).completed shouldBe true
+        completedTodos.toList().get(0).status shouldBe Status.DONE
     }
 }

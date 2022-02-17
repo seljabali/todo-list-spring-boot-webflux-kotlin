@@ -39,7 +39,7 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "test title",
-                        completed = false
+                        status = Status.TODO
                     )
                 )
             )
@@ -58,7 +58,7 @@ class TodoControllerTest {
                 Todo(
                     id = 1L,
                     title = "test title",
-                    completed = false
+                    status = Status.TODO
                 )
             )
         )
@@ -80,7 +80,7 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "test title",
-                        completed = false
+                        status = Status.TODO
                     )
                 )
             )
@@ -103,7 +103,7 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "test title",
-                        completed = false
+                        status = Status.TODO
                     )
                 )
             )
@@ -113,7 +113,7 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "update title",
-                        completed = false
+                        status = Status.TODO
                     )
                 )
             )
@@ -136,7 +136,7 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "test title",
-                        completed = false
+                        status = Status.TODO
                     )
                 )
             )
@@ -146,13 +146,13 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "test title",
-                        completed = true
+                        status = Status.DONE
                     )
                 )
             )
-        val body = MarkAsCompletedCommand(completed = true)
+        val body = UpdateStatusCommand(status = Status.DONE)
         client.put()
-            .uri("/todos/1/completed").bodyValue(body)
+            .uri("/todos/1/status").bodyValue(body)
             .exchange()
             .expectStatus().isNoContent
 
@@ -168,7 +168,7 @@ class TodoControllerTest {
                     Todo(
                         id = 1L,
                         title = "test title",
-                        completed = false
+                        status = Status.TODO
                     )
                 )
             )

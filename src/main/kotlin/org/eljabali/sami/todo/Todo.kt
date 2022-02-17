@@ -15,8 +15,8 @@ data class Todo(
     @Column(value = "title")
     var title: String,
 
-    @Column(value = "completed")
-    var completed: Boolean = false,
+    @Column(value = "status")
+    var status: Status = Status.TODO,
 
     @Column(value = "created_at")
     @CreatedDate

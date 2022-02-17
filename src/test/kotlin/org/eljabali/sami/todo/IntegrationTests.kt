@@ -72,7 +72,7 @@ class IntegrationTests {
             .`as` { StepVerifier.create(it) }
             .consumeNextWith {
                 assertThat(it.title).isEqualTo("test todo")
-                assertThat(it.completed).isFalse()
+                assertThat(it.status).isEqualTo(Status.TODO)
                 assertThat(it.createdAt).isNotNull()
                 assertThat(it.createdBy).isNotNull()
             }
@@ -82,8 +82,8 @@ class IntegrationTests {
         //make the todo item as completed.
         client.mutate().filter(basicAuthentication("user", "password")).build()
             .put()
-            .uri("$savedPostUri/completed").contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(MarkAsCompletedCommand(completed = true))
+            .uri("$savedPostUri/status").contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(UpdateStatusCommand(status = Status.WORK_IN_PROGRESS))
             .exchangeToMono {
                 assertTrue(it.statusCode().is2xxSuccessful)
                 Mono.empty<Nothing>()
@@ -101,7 +101,7 @@ class IntegrationTests {
             .`as` { StepVerifier.create(it) }
             .consumeNextWith {
                 assertThat(it.title).isEqualTo("test todo")
-                assertThat(it.completed).isTrue()
+                assertThat(it.status).isEqualTo(Status.WORK_IN_PROGRESS)
                 assertThat(it.createdAt).isNotNull()
                 assertThat(it.createdBy).isNotNull()
             }
