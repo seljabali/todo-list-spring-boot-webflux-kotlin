@@ -1,6 +1,8 @@
 package org.eljabali.sami.todo
 
+import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.info.Info
+import io.swagger.v3.oas.models.security.SecurityScheme
 import org.springdoc.core.GroupedOpenApi
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
@@ -98,7 +100,17 @@ class SpringDocConfig {
     fun todosOpenApi(appProperties: AppProperties): GroupedOpenApi? {
         val paths = arrayOf("/todos/**")
         return GroupedOpenApi.builder().group("todos")
-            .addOpenApiCustomiser { openApi -> openApi.info(Info().title("TodoList API").version(appProperties.version)) }
+            .addOpenApiCustomiser {
+                it
+                    .components(
+                        Components()
+                            .addSecuritySchemes(
+                                "basicScheme",
+                                SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")
+                            )
+                    )
+                    .info(Info().title("TodoList API").version(appProperties.version))
+            }
             .pathsToMatch(*paths)
             .build()
     }

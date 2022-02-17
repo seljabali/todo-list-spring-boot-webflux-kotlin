@@ -1,7 +1,9 @@
 package org.eljabali.sami.todo
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse
@@ -18,7 +20,19 @@ class TodoController(
     private val todos: TodoRepository
 ) {
     @GetMapping("")
-    @ApiResponses(value = [ApiResponse(responseCode = "200", description = "Get all Todos")])
+    @Operation(
+        operationId = "get_all_posts",
+        description = "Get all Todos",
+        responses = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Get all posts",
+                content = [
+                    Content(schema = Schema(implementation = Array<Todo>::class))
+                ]
+            )
+        ]
+    )
     fun findAll(): Flow<Todo> = todos.findAll().asFlow()
 
     @GetMapping("{id}")

@@ -36,6 +36,7 @@ dependencies {
 
     //spring doc support
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springdoc:springdoc-openapi-kotlin:${springdocVersion}")
     implementation("org.springdoc:springdoc-openapi-webflux-ui:${springdocVersion}")
     implementation("org.springdoc:springdoc-openapi-security:${springdocVersion}")
 
