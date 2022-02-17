@@ -1,7 +1,10 @@
 package org.eljabali.sami.todo
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.info.Info
+import io.swagger.v3.oas.models.media.Schema
+import io.swagger.v3.oas.models.media.StringSchema
 import io.swagger.v3.oas.models.security.SecurityScheme
 import org.springdoc.core.GroupedOpenApi
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -27,6 +30,7 @@ import org.springframework.web.cors.reactive.CorsConfigurationSource
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.switchIfEmpty
+import java.time.LocalDateTime
 
 
 @SpringBootApplication
@@ -94,6 +98,11 @@ class SecurityConfig {
 
 
 @Configuration
+@io.swagger.v3.oas.annotations.security.SecurityScheme(
+    name = "basicScheme",
+    type = SecuritySchemeType.HTTP,
+    scheme = "basic"
+)
 class SpringDocConfig {
 
     @Bean
@@ -102,15 +111,34 @@ class SpringDocConfig {
         return GroupedOpenApi.builder().group("todos")
             .addOpenApiCustomiser {
                 it
-                    .components(
-                        Components()
-                            .addSecuritySchemes(
-                                "basicScheme",
-                                SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")
-                            )
-                    )
+                        // the manual step to add security schema is problematic,
+                        // see: https://github.com/springdoc/springdoc-openapi/issues/1508
+//                    .components(
+//                        Components()
+//                            .schemas(
+//                                mapOf(
+//                                    "Todo" to Schema<Todo>().properties(
+//                                        mapOf(
+//                                            "id" to StringSchema(),
+//                                            "title" to StringSchema(),
+//                                            "status" to Schema<Status>(),
+//                                            "createdAt" to Schema<LocalDateTime>().apply {
+//                                                type = "string"
+//                                                format = "date-time"
+//                                            },
+//                                            "createdBy" to StringSchema()
+//                                        )
+//                                    )
+//                                )
+//                            )
+//                            .addSecuritySchemes(
+//                                "basicScheme",
+//                                SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")
+//                            )
+//                    )
                     .info(Info().title("TodoList API").version(appProperties.version))
             }
+            //.packagesToScan(Todo::class.java.packageName)
             .pathsToMatch(*paths)
             .build()
     }
