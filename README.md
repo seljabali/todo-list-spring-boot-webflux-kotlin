@@ -1,32 +1,36 @@
 <div id="top"></div>
 
-<h2 align="center">Todo List</h2>
+<h2 align="center">Todo List (Spring Boot)</h2>
 <br>
 
-## Built With
+## Tech Stack
 * [Kotlin](https://kotlinlang.org/)
 * [PostgreSQL](https://www.postgresql.org)
 * [Spring Boot 2.6.3](https://spring.io)
+  * [WebFlux using Coroutines](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html) 
+  * [R2DBC](https://spring.io/projects/spring-data-r2dbc) 
+
+## Features
+* Mockk + Spring Mockk to mock beans.
+* Kotest assertions provides fluent Kotlin DSL API for assertions in tests.
+* Spring Doc to expose OpenAPI via Swagger at http://localhost:9090/actuator/webjars/swagger-ui/index.html
+* Docker Compose to serve a running Postgres when running the application.
+* Test persistence with a Postgres database running in TestContainers.
 
 ## Prerequisites
 * [Java JDK Oracle (SE) 17](https://www.oracle.com/java/technologies/downloads/#java17)
 * [IntelliJ IDEA CE](https://www.jetbrains.com/idea/download/)
 
-## Dependencies
-* [Spring Reactive Webflux](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux)
-* [Spring Data R2DBC SQL](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-r2dbc)
+## Libraries
+* [Jackson](https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin)
+* [Kotest](https://mvnrepository.com/artifact/io.kotest/kotest-assertions-core-jvm)
+* [Mockk](https://mvnrepository.com/artifact/io.mockk/mockk)
 * [PostgreSQL Driver SQL](https://mvnrepository.com/artifact/org.postgresql/postgresql)
-
-
-
-## Features
-
-* Tech stack: Spring WebFlux+ Kotlin Coroutines+ Spring Data R2dbc 
-* Instread of Mockito, using Mockk and Spring Mockk to mock beans 
-* Kotest assertions provides fluent Kotlin DSL API for assertions in tests
-* Spring Doc to expose OopenAPI and SwaggerUI on the management endpoints. The Swagger UI is located at http://localhost:9090/actuator/swagger-ui . 
-* Docker Compose to serve a running Postgres when running the application
-* Test persistence with a Postgres database running in TestContainers  
+* [Spring Boot Starter Security](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security)
+* [Spring Data R2DBC SQL](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-r2dbc)
+* [Spring Mockk](https://mvnrepository.com/artifact/com.ninja-squad/springmockk)
+* [Spring Reactive Webflux](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux)
+* [Test Containers](https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter)
 
 ## Troubleshooting
 
